@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 class KategoriController extends Controller
 {
-    public function index($slug_kategoriadi){
-        $kategori = Kategori::where('slug', $slug_kategoriadi)->firstOrFail();
+    public function index($slug){
+        $kategori = Kategori::where('slug', $slug)->firstOrFail();
         $alt_kategoriler= Kategori::where('ust_id',$kategori->id)->get();
-        return view('kategori',compact('kategori','alt_kategoriler'));
+
+        $urunler= $kategori->urunler;
+
+        return view('kategori',compact('kategori','alt_kategoriler','urunler'));
     }
 }

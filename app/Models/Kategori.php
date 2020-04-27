@@ -12,4 +12,8 @@ class Kategori extends Model
     const DELETED_AT = 'silinme_tarihi';
     protected $table = "kategori";
     protected $guarded = [];
+
+    public function urunler(){
+        return $this->belongsToMany('App\Models\Urun','kategori_urun');
+    }
 }

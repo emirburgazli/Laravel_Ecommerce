@@ -1,32 +1,34 @@
 @extends('layout.master')
-@section('title','Urun')
+@section('title',$urun->urun_adi)
 @section('content')
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="#">Anasayfa</a></li>
-            <li><a href="#">Kategori</a></li>
-            <li class="active">Kategori</li>
+            @foreach($urun->kategoriler()->distinct()->get() as $kategori)
+            <li><a href="{{ route('kategori', $kategori->slug) }}">{{$kategori->kategori_adi}}</a></li>
+            @endforeach
+            <li class="active">{{$urun->urun_adi}}</li>
         </ol>
         <div class="bg-content">
             <div class="row">
                 <div class="col-md-5">
-                    <img src="http://lorempixel.com/400/200/food/1">
+                    <img src="https://via.placeholder.com/400x200?text=UrunResmi">
                     <hr>
                     <div class="row">
                         <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img src="http://lorempixel.com/60/60/food/2"></a>
+                            <a href="#" class="thumbnail"><img src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
                         </div>
                         <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img src="http://lorempixel.com/60/60/food/3"></a>
+                            <a href="#" class="thumbnail"><img src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
                         </div>
                         <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img src="http://lorempixel.com/60/60/food/4"></a>
+                            <a href="#" class="thumbnail"><img src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <h1>Ürün adı</h1>
-                    <p class="price">129 ₺</p>
+                    <h1>{{ $urun->urun_adi }}</h1>
+                    <p class="price">{{$urun->fiyat}} ₺</p>
                     <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
                 </div>
             </div>
@@ -37,8 +39,12 @@
                     <li role="presentation"><a href="#t2" data-toggle="tab">Yorumlar</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="t1">t1</div>
-                    <div role="tabpanel" class="tab-pane" id="t2">t2</div>
+                    <div role="tabpanel" class="tab-pane active" id="t1">
+                        {{$urun->acıklama}}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="t2">
+                        Henüz Yorum Yapılmamıştır..!
+                    </div>
                 </div>
             </div>
 

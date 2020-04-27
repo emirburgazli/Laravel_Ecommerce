@@ -18,9 +18,9 @@ class UrunTableSeeder extends Seeder
             $urun_adi=$faker->sentence(2);
             DB::table('urun')->insert([
                 'urun_adi' => $urun_adi,
-                'slug' => strtolower($urun_adi),
-                'acıklama'=>$faker->sentence(3),
-                'fiyat'=>$faker->randomFloat(3,1,20)
+                'slug' => mb_strtolower($urun_adi),
+                'acıklama'=>$faker->sentence(20),
+                'fiyat'=>$faker->randomFloat(2,1,20)
             ]);
         }
     }

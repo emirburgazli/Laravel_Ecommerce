@@ -14,4 +14,8 @@ class Urun extends Model
     const UPDATED_AT = 'guncelleme_tarihi';
     const DELETED_AT = 'silinme_tarihi';
     protected $guarded = [];
+
+    public function kategoriler(){
+        return $this->belongsToMany('App\Models\Kategori','kategori_urun');
+    }
 }
