@@ -1,8 +1,11 @@
 <?php
 
 use App\Models\Urun;
+use App\Models\UrunDetay;
 use Illuminate\Database\Seeder;
-use \Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 class UrunTableSeeder extends Seeder
 {
@@ -13,15 +16,26 @@ class UrunTableSeeder extends Seeder
      */
     public function run(Faker\Generator $faker)
     {
-        DB::table('urun')->truncate();
-        for ($i =0;$i<30; $i++) {
-            $urun_adi=$faker->sentence(2);
-            DB::table('urun')->insert([
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Urun::truncate();
+        UrunDetay::truncate();
+        for ($i = 0; $i < 30; $i++) {
+            $urun_adi = $faker->streetName;
+            $urun = DB::table('urun')->insert([
                 'urun_adi' => $urun_adi,
-                'slug' => mb_strtolower($urun_adi),
-                'acıklama'=>$faker->sentence(20),
-                'fiyat'=>$faker->randomFloat(2,1,20)
+                'slug' => Str::slug($urun_adi),
+                'acıklama' => $faker->paragraph(30),
+                'fiyat' => $faker->randomFloat(2, 1, 20)
             ]);
+            /* $detay = UrunDetay::create([
+                 'goster_slider'=>rand(0,1),
+                 'goster_gunun_firsati'=>rand(0,1),
+                 'goster_one_cıkanlar'=>rand(0,1),
+                 'goster_cok_satanlar'=>rand(0,1),
+                 'goster_indirimli'=>rand(0,1)
+             ]);
+             */
         }
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

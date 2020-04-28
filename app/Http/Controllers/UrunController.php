@@ -10,6 +10,7 @@ class UrunController extends Controller
 {
     public function index($slug){
         $urun = Urun::where('slug',$slug)->firstOrFail();
-        return view('urun',compact('urun'));
+        $kategoriler= $urun->kategoriler()->distinct()->get();
+        return view('urun',compact('urun','kategoriler'));
     }
 }

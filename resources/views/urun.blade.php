@@ -4,7 +4,7 @@
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="#">Anasayfa</a></li>
-            @foreach($urun->kategoriler()->distinct()->get() as $kategori)
+            @foreach($kategoriler as $kategori)
             <li><a href="{{ route('kategori', $kategori->slug) }}">{{$kategori->kategori_adi}}</a></li>
             @endforeach
             <li class="active">{{$urun->urun_adi}}</li>
@@ -12,9 +12,12 @@
         <div class="bg-content">
             <div class="row">
                 <div class="col-md-5">
-                    <img src="https://via.placeholder.com/400x200?text=UrunResmi">
+                    <img src="https://via.placeholder.com/400x300?text=UrunResmi">
                     <hr>
                     <div class="row">
+                        <div class="col-xs-3">
+                            <a href="#" class="thumbnail"><img src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
+                        </div>
                         <div class="col-xs-3">
                             <a href="#" class="thumbnail"><img src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
                         </div>
