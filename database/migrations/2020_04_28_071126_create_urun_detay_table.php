@@ -21,7 +21,7 @@ class CreateUrunDetayTable extends Migration
             $table->boolean('goster_one_cıkanlar')->default(0);
             $table->boolean('goster_cok_satanlar')->default(0);
             $table->boolean('goster_indirimli')->default(0);
-
+            $table->timestamps();
             $table->foreign('urun_id')->references('id')->on('urun')->onDelete('cascade');
 
         });

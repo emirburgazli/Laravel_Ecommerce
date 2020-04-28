@@ -11,7 +11,7 @@ class UrunDetay extends Model
     public $timestamps = false;
 
 
-    public function detay()
+    public function urun()
     {
         return $this->belongsTo('App\Models\Urun');
     }
