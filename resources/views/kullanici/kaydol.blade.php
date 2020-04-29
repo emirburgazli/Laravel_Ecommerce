@@ -7,36 +7,44 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Kaydol</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="#">
-
-                            <div class="form-group has-error">
-                                <label for="name" class="col-md-4 control-label">Kullanıcı Adı</label>
+                        @if(count($errors)>0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form class="form-horizontal" role="form" method="POST" action="{{ route('kullanici.kaydol') }}">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <label for="adsoyad" class="col-md-4 control-label">Ad Soyad</label>
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="" required autofocus>
-                                    <span class="help-block">
-                                        <strong>Kullanıcı adı boş bırakılamaz</strong>
-                                    </span>
+                                    <input id="adsoyad" type="text" class="form-control" name="adsoyad" value=""
+                                           required autofocus>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="email" class="col-md-4 control-label">Email</label>
+                                <label for="mail" class="col-md-4 control-label">Email</label>
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="" required>
+                                    <input id="mail" type="email" class="form-control" name="mail" value="" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="password" class="col-md-4 control-label">Şifre</label>
+                                <label for="sifre" class="col-md-4 control-label">Şifre</label>
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required>
+                                    <input id="sifre" type="password" class="form-control" name="sifre" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Şifre (Tekrar)</label>
+                                <label for="sifre_tekrari" class="col-md-4 control-label">Şifre (Tekrar)</label>
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                    <input id="sifre_tekrari" type="password" class="form-control"
+                                           name="sifre_tekrari" required>
                                 </div>
                             </div>
 
