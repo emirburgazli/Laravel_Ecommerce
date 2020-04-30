@@ -8,11 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Kullanici extends Authenticatable
 {
     use SoftDeletes;
-
+    protected $table = "kullanici";
     const CREATED_AT = 'olusturma_tarihi';
     const UPDATED_AT = 'guncelleme_tarihi';
     const DELETED_AT = 'silinme_tarihi';
-    protected $table = "kullanici";
+
     protected $fillable = ['adsoyad', 'mail', 'sifre', 'aktivasyon_anahtari', 'aktif_mi'];
     protected $hidden = ['sifre', 'aktivasyon_anahtari',];
 }

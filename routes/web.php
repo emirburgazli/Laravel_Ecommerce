@@ -37,3 +37,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('test/mail',function(){
+    $kullanici = App\Models\Kullanici::find(1);
+ return new App\Mail\KullaniciKayitMail($kullanici);
+});

@@ -1,19 +1,17 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
-    | Authentication Language Lines
+    | Kimlik kontrol metinleri
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
+    | Aşağıdaki metinler kimlik doğrulama (giriş) sırasında kullanıcılara
+    | gösterilebilecek mesajlardır. Bu metinleri uygulamanızın
+    | gereksinimlerine göre düzenlemekte özgürsünüz.
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'failed' => 'Girilmiş olan kullanıcı verileri sistemdekiler ile eşleşmemektedir.',
+    'throttle' => 'Çok fazla oturum açma girişiminde bulundunuz. Lütfen :seconds saniye içerisinde tekrar deneyiz.',
 ];
