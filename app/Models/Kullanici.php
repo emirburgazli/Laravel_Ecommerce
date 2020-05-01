@@ -14,5 +14,10 @@ class Kullanici extends Authenticatable
     const DELETED_AT = 'silinme_tarihi';
 
     protected $fillable = ['adsoyad', 'mail', 'sifre', 'aktivasyon_anahtari', 'aktif_mi'];
-    protected $hidden = ['sifre', 'aktivasyon_anahtari',];
+    protected $hidden = ['sifre', 'aktivasyon_anahtari'];
+     public function getAuthPassword()
+     {
+         return $this->sifre;
+     }
+
 }

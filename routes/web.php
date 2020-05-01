@@ -25,8 +25,10 @@ Route::get('/siparis/{id}', 'SiparisController@detay')->name('siparis');
 
 Route::group(['prefix' => 'kullanici'], function () {
     Route::get('/oturumac', 'KullaniciController@giris_form')->name('kullanici.oturumac');
+    Route::post('/oturumac', 'KullaniciController@giris');
     Route::get('/kaydol', 'KullaniciController@kaydol_form')->name('kullanici.kaydol');
     Route::post('/kaydol', 'KullaniciController@kaydol');
+    Route::get('/aktiflestir/{anahtar}', 'KullaniciController@aktiflestir')->name('aktiflestir');
 });
 
 
@@ -39,6 +41,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('test/mail',function(){
-    $kullanici = App\Models\Kullanici::find(1);
+    $kullanici = App\Models\Kullanici::find(11);
  return new App\Mail\KullaniciKayitMail($kullanici);
 });
