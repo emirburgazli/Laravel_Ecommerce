@@ -35,15 +35,26 @@
                     <li><a href="{{route('kullanici.kaydol')}}">Kaydol</a></li>
                 @endguest
                 @auth
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"> Profil <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Siparişlerim</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Çıkış</a></li>
-                    </ul>
-                </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"> Profil <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Siparişlerim</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="{{ route('kullanici.oturumukapat') }}"
+                                   onclick="document.getElementById('logout-form').addEventListener("click", function(event){
+                                       event.preventDefault();
+                                   }">Çıkış</a>
+                                <form action="logout-form"
+                                      action="{{route('kullanici.oturumukapat')}}"
+                                      method="post"
+                                      style="display: none">
+                                    {{csrf_field()}}
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
                 @endauth
             </ul>
         </div>

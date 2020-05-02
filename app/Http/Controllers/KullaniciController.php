@@ -89,4 +89,10 @@ class KullaniciController extends Controller
             ->with('mesaj', 'Mail Adresinizden üyeliğinizi aktifleştirin.')
             ->with('mesaj_tur', 'warning');
     }
+    public function oturumukapat(){
+        auth()->logout();
+        request()->session()->flush();
+        request()->session()->regenerate();
+        return redirect()->route('anasayfa');
+    }
 }
