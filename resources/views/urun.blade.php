@@ -5,7 +5,7 @@
         <ol class="breadcrumb">
             <li><a href="#">Anasayfa</a></li>
             @foreach($kategoriler as $kategori)
-            <li><a href="{{ route('kategori', $kategori->slug) }}">{{$kategori->kategori_adi}}</a></li>
+                <li><a href="{{ route('kategori', $kategori->slug) }}">{{$kategori->kategori_adi}}</a></li>
             @endforeach
             <li class="active">{{$urun->urun_adi}}</li>
         </ol>
@@ -16,23 +16,31 @@
                     <hr>
                     <div class="row">
                         <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
+                            <a href="#" class="thumbnail"><img
+                                    src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
                         </div>
                         <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
+                            <a href="#" class="thumbnail"><img
+                                    src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
                         </div>
                         <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
+                            <a href="#" class="thumbnail"><img
+                                    src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
                         </div>
                         <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
+                            <a href="#" class="thumbnail"><img
+                                    src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-7">
                     <h1>{{ $urun->urun_adi }}</h1>
                     <p class="price">{{$urun->fiyat}} ₺</p>
-                    <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
+                    <form action="{{route('sepet.ekle')}}" method="post">
+                        {{csrf_field()}}
+                        <input type="hidden" name="id" value="{{$urun->id}}">
+                        <input type="submit" class="btn btn-theme" value="Sepete Ekle">
+                    </form>
                 </div>
             </div>
 

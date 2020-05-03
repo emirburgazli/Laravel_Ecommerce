@@ -18,11 +18,17 @@ Route::get('/kategori/{slug}', 'KategoriController@index')->name('kategori');
 Route::get('/urun/{slug}', 'UrunController@index')->name('urun');
 Route::post('/ara', 'UrunController@ara')->name('urun_ara');
 Route::get('/ara', 'UrunController@ara')->name('urun_ara');
-Route::get('/sepet', 'SepetController@index')->name('sepet');
-Route::get('/odeme', 'OdemeController@index')->name('odeme');
-Route::get('/siparisler', 'SiparisController@index')->name('siparisler');
-Route::get('/siparis/{id}', 'SiparisController@detay')->name('siparis');
 
+Route::group(['prefix' => 'sepet'], function () {
+    Route::get('/', 'SepetController@index')->name('sepet');
+    Route::post('/ekle', 'SepetController@ekle')->name('sepet.ekle');
+});
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/odeme', 'OdemeController@index')->name('odeme');
+    Route::get('/siparisler', 'SiparisController@index')->name('siparisler');
+    Route::get('/siparis/{id}', 'SiparisController@detay')->name('siparis');
+});
 Route::group(['prefix' => 'kullanici'], function () {
     Route::get('/oturumac', 'KullaniciController@giris_form')->name('kullanici.oturumac');
     Route::post('/oturumac', 'KullaniciController@giris');
@@ -41,7 +47,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('test/mail',function(){
+Route::get('test/mail', function () {
     $kullanici = App\Models\Kullanici::find(11);
- return new App\Mail\KullaniciKayitMail($kullanici);
+    return new App\Mail\KullaniciKayitMail($kullanici);
 });
