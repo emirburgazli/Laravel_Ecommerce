@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'AnasayfaController@index')->name('anasayfa');
 Route::get('/kategori/{slug}', 'KategoriController@index')->name('kategori');
+
 Route::get('/urun/{slug}', 'UrunController@index')->name('urun');
 Route::post('/ara', 'UrunController@ara')->name('urun_ara');
 Route::get('/ara', 'UrunController@ara')->name('urun_ara');
@@ -22,10 +23,15 @@ Route::get('/ara', 'UrunController@ara')->name('urun_ara');
 Route::group(['prefix' => 'sepet'], function () {
     Route::get('/', 'SepetController@index')->name('sepet');
     Route::post('/ekle', 'SepetController@ekle')->name('sepet.ekle');
+    Route::delete('/kaldir/{rowid}', 'SepetController@kaldir')->name('sepet.kaldir');
+    Route::delete('/bosalt', 'SepetController@bosalt')->name('sepet.bosalt');
+    Route::patch('/guncelle/{rowid}', 'SepetController@guncelle')->name('sepet.guncelle');
 });
 
+Route::get('/odeme', 'OdemeController@index')->name('odeme');
+Route::post('/odeme', 'OdemeController@odemeyap')->name('odemeyap');
+
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/odeme', 'OdemeController@index')->name('odeme');
     Route::get('/siparisler', 'SiparisController@index')->name('siparisler');
     Route::get('/siparis/{id}', 'SiparisController@detay')->name('siparis');
 });
@@ -37,15 +43,6 @@ Route::group(['prefix' => 'kullanici'], function () {
     Route::get('/aktiflestir/{anahtar}', 'KullaniciController@aktiflestir')->name('aktiflestir');
     Route::get('/oturumukapat', 'KullaniciController@oturumukapat')->name('kullanici.oturumukapat');
 });
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('test/mail', function () {
     $kullanici = App\Models\Kullanici::find(11);

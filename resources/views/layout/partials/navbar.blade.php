@@ -27,8 +27,8 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><i class="fa fa-shopping-cart">
-                        </i> Sepet <span class="badge badge-theme">5</span></a>
+                <li><a href="{{route('sepet')}}"><i class="fa fa-shopping-cart">
+                        </i> Sepet <span class="badge badge-theme">{{Cart::count()}}</span></a>
                 </li>
                 @guest
                     <li><a href="{{route('kullanici.oturumac')}}">Oturum Aç</a></li>
@@ -39,13 +39,14 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false"> Profil <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Siparişlerim</a></li>
+                            <li><a href="{{route('siparisler')}}">Siparişlerim</a></li>
                             <li role="separator" class="divider"></li>
                             <li>
                                 <a href="{{ route('kullanici.oturumukapat') }}"
-                                   onclick="document.getElementById('logout-form').addEventListener("click", function(event){
-                                       event.preventDefault();
-                                   }">Çıkış</a>
+                                   onclick="document.getElementById('logout-form').addEventListener(" click",
+                                function(event){
+                                event.preventDefault();
+                                }">Çıkış</a>
                                 <form action="logout-form"
                                       action="{{route('kullanici.oturumukapat')}}"
                                       method="post"

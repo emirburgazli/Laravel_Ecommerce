@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Mail\KullaniciKayitMail;
 use App\Models\Kullanici;
+use App\Models\KullaniciDetay;
+use App\Models\Sepet;
+use App\Models\SepetUrun;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -19,19 +23,40 @@ class KullaniciController extends Controller
 
     public function giris()
     {
-
         $this->validate(request(), [
             'mail' => 'required|email',
-            'sifre'=>'required'
+            'sifre' => 'required'
         ]);
-        if(auth()->attempt(['mail'=>request('mail'),'password'=>request('sifre') ],request()->has('benihatirla')))
-        {
+        if (auth()
+            ->attempt(['mail' => request('mail'), 'password' => request('sifre')], request()
+                ->has('benihatirla'))) {
             request()->session()->regenerate();
-           return redirect()->intended('/');
-        }
-        else
-        {
-            $errors =['mail'=>'Hatalı Giriş'];
+
+            $aktif_sepet_id = Sepet::aktif_sepet_id();
+            if (!is_null($aktif_sepet_id)) {
+                $aktif_sepet = Sepet::create([
+                    'kullanici_id' => auth()->id()]);
+                $aktif_sepet_id=$aktif_sepet->id;
+            }
+            session()->put('aktif_sepet_id', $aktif_sepet_id);
+            if (Cart::count() > 0) {
+                foreach (Cart::content() as $cartItem) {
+                    SepetUrun::updateOrCreate(
+                        ['sepet_id' => $aktif_sepet_id, 'urun_id' => $cartItem->id],
+                        ['adet' => $cartItem->qty, 'fiyati' => $cartItem->price, 'durum' => 'Beklemede']
+                    );
+                }
+            }
+
+            Cart::destroy();
+            $sepetUrunler = SepetUrun::with('urun')->where('sepet_id', $aktif_sepet_id)->get();
+            foreach ($sepetUrunler as $sepetUrun) {
+                Cart::add($sepetUrun->urun->id, $sepetUrun->urun->urun_adi, $sepetUrun->adet, $sepetUrun->fiyati);
+            }
+
+            return redirect()->intended('/');
+        } else {
+            $errors = ['mail' => 'Hatalı Giriş'];
             return back()->withErrors($errors);
         }
     }
@@ -66,14 +91,10 @@ class KullaniciController extends Controller
             'adsoyad' => 'required|string|min:5|max:60',
             'mail' => 'required|string|email|unique:kullanici',
             'sifre' => 'required|string|confirmed|min:5|max:15'
-
-
         ]);
         if ($v->fails()) {
             return redirect('/kullanici/kaydol')->withErrors($v->errors());
         }
-
-
         $kullanici = Kullanici::create([
             'adsoyad' => request('adsoyad'),
             'mail' => request('mail'),
@@ -81,6 +102,9 @@ class KullaniciController extends Controller
             'aktivasyon_anahtari' => Str::Random(60),
             'aktif_mi' => 0
         ]);
+
+        $kullanici->detay()->save(new KullaniciDetay());
+
         Mail::to(request('mail'))->send(new KullaniciKayitMail($kullanici));
 
         auth()->guest($kullanici);
@@ -89,7 +113,9 @@ class KullaniciController extends Controller
             ->with('mesaj', 'Mail Adresinizden üyeliğinizi aktifleştirin.')
             ->with('mesaj_tur', 'warning');
     }
-    public function oturumukapat(){
+
+    public function oturumukapat()
+    {
         auth()->logout();
         request()->session()->flush();
         request()->session()->regenerate();
