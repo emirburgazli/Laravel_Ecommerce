@@ -28,7 +28,7 @@ class KullaniciController extends Controller
             'sifre' => 'required'
         ]);
         if (auth()
-            ->attempt(['mail' => request('mail'), 'password' => request('sifre')], request()
+            ->attempt(['mail' => request('mail'), 'password' => request('sifre'),'aktif_mi'=>1], request()
                 ->has('benihatirla'))) {
             request()->session()->regenerate();
 

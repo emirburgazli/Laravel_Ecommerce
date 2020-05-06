@@ -3,11 +3,18 @@
 namespace App\Http\Controllers\Yonetim;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kullanici;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\validate;
 
 class KullaniciController extends Controller
 {
+    public function index()
+    {
+        $list = Kullanici::orderByDesc('olusturma_tarihi')->paginate(8);
+        return view('yonetim.kullanici.index', compact('list'));
+    }
+
     public function oturumac()
     {
         if (request()->isMethod('POST')) {
@@ -18,7 +25,7 @@ class KullaniciController extends Controller
             ]);
 
             if (Auth::guard('yonetim')
-                ->attempt(['mail' => request('mail'), 'password' => request('sifre'), 'yonetici_mi' => 1], request()
+                ->attempt(['mail' => request('mail'), 'password' => request('sifre'), 'yonetici_mi' => 1, 'aktif_mi' => 1], request()
                     ->has('benihatirla'))) {
                 return redirect()->route('yonetim.anasayfa');
             } else {
@@ -26,6 +33,15 @@ class KullaniciController extends Controller
             }
         }
         return view('yonetim.oturumac');
+    }
+
+    public function form($id = 0)
+    {
+        $kullanici = new Kullanici();
+        if ($id > 0) {
+            $kullanici = Kullanici::find($id);
+            return view('yonetim.kullanici.form',compact('kullanici'));
+        }
     }
 
     public function oturumukapat()
