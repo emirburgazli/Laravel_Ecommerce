@@ -2,20 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::group(['prefix' => 'yonetim', 'namespace' => 'Yonetim'], function () {
+    Route::redirect('/', 'yonetim/oturumac');
+    Route::match(['get', 'post'], '/oturumac', 'KullaniciController@oturumac')->name('yonetim.oturumac');
+    Route::get('/oturumukapat', 'KullaniciController@oturumukapat')->name('yonetim.oturumukapat');
 
+    Route::group(['middleware' => 'yonetim'], function () {
+        Route::get('/anasayfa', 'AnasayfaController@index')->name('yonetim.anasayfa');
+    });
+});
 Route::get('/', 'AnasayfaController@index')->name('anasayfa');
 Route::get('/kategori/{slug}', 'KategoriController@index')->name('kategori');
-
 Route::get('/urun/{slug}', 'UrunController@index')->name('urun');
 Route::post('/ara', 'UrunController@ara')->name('urun_ara');
 Route::get('/ara', 'UrunController@ara')->name('urun_ara');
@@ -27,11 +24,10 @@ Route::group(['prefix' => 'sepet'], function () {
     Route::delete('/bosalt', 'SepetController@bosalt')->name('sepet.bosalt');
     Route::patch('/guncelle/{rowid}', 'SepetController@guncelle')->name('sepet.guncelle');
 });
-
 Route::get('/odeme', 'OdemeController@index')->name('odeme');
 Route::post('/odeme', 'OdemeController@odemeyap')->name('odemeyap');
 
-Route::group(['middleware' => 'auth'], function(){
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/siparisler', 'SiparisController@index')->name('siparisler');
     Route::get('/siparis/{id}', 'SiparisController@detay')->name('siparis');
 });
@@ -43,7 +39,6 @@ Route::group(['prefix' => 'kullanici'], function () {
     Route::get('/aktiflestir/{anahtar}', 'KullaniciController@aktiflestir')->name('aktiflestir');
     Route::get('/oturumukapat', 'KullaniciController@oturumukapat')->name('kullanici.oturumukapat');
 });
-
 Route::get('test/mail', function () {
     $kullanici = App\Models\Kullanici::find(11);
     return new App\Mail\KullaniciKayitMail($kullanici);

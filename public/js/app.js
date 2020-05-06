@@ -37396,6 +37396,17 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/sass/admin.scss":
+/*!***********************************!*\
+  !*** ./resources/sass/admin.scss ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -37407,15 +37418,40 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/sass/commerce.scss":
+/*!**************************************!*\
+  !*** ./resources/sass/commerce.scss ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/login.scss":
+/*!***********************************!*\
+  !*** ./resources/sass/login.scss ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!****************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/admin.scss ./resources/sass/login.scss ./resources/sass/commerce.scss ***!
+  \****************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/ecommerce/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/ecommerce/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/ecommerce/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/ecommerce/resources/sass/admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/ecommerce/resources/sass/login.scss */"./resources/sass/login.scss");
+module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/ecommerce/resources/sass/commerce.scss */"./resources/sass/commerce.scss");
 
 
 /***/ })
