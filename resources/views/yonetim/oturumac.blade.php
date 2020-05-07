@@ -14,7 +14,7 @@
     <form class="form-signin" action="{{route('yonetim.oturumac')}}" method="post">
         {{csrf_field()}}
         <img src="/img/logo.png" class="logo">
-        @include('layout.partials.errors')
+        @include('layouts.partials.errors')
         <label for="mail" class="sr-only">Email </label>
         <input type="email" id="mail" name="mail" class="form-control" placeholder="Mail" required autofocus>
         <label for="sifre" class="sr-only">Şifre</label>

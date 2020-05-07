@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.master')
 @section('title','Siparişler')
 @section('content')
     <div class="container">

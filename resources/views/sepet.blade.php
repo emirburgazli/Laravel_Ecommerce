@@ -1,10 +1,10 @@
-@extends('layout.master')
+@extends('layouts.master')
 @section('title','Sepet')
 @section('content')
     <div class="container">
         <div class="bg-content">
             <h2>Sepet</h2>
-            @include('layout.partials.alert')
+            @include('layouts.partials.alert')
 
             @if(count(Cart::content())>0)
                 <table class="table table-bordererd table-hover">

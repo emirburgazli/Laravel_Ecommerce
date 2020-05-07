@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.master')
 @section('title','Oturum Aç')
 @section('content')
     <div class="container">
@@ -7,8 +7,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Oturum Aç</div>
                     <div class="panel-body">
-                        @include('layout.partials.errors')
-                        @include('layout.partials.alert')
+                        @include('layouts.partials.errors')
+                        @include('layouts.partials.alert')
                         <form class="form-horizontal" role="form" method="POST"
                               action="{{route('kullanici.oturumac')}}">
                             {{csrf_field()}}

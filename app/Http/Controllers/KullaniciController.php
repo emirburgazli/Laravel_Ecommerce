@@ -27,8 +27,14 @@ class KullaniciController extends Controller
             'mail' => 'required|email',
             'sifre' => 'required'
         ]);
+
+        $crendentials=[
+            'mail' => request('mail'),
+            'password' => request('sifre'),
+            'aktif_mi'=>1
+        ];
         if (auth()
-            ->attempt(['mail' => request('mail'), 'password' => request('sifre'),'aktif_mi'=>1], request()
+            ->attempt($crendentials, request()
                 ->has('benihatirla'))) {
             request()->session()->regenerate();
 

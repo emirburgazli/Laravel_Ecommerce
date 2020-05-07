@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.master')
 @section('title',$urun->urun_adi)
 @section('content')
     <div class="container">
