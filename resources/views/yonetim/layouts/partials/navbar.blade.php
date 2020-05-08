@@ -18,11 +18,9 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="{{route('yonetim.anasayfa')}}">Giriş</a>
+                    <a href="{{route('anasayfa')}}">Siteye Dön</a>
                 </li>
-                <li>
-                    <a href="#">Ayarlar</a>
-                </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

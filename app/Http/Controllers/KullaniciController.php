@@ -28,10 +28,10 @@ class KullaniciController extends Controller
             'sifre' => 'required'
         ]);
 
-        $crendentials=[
+        $crendentials = [
             'mail' => request('mail'),
             'password' => request('sifre'),
-            'aktif_mi'=>1
+            'aktif_mi' => 1
         ];
         if (auth()
             ->attempt($crendentials, request()
@@ -42,7 +42,7 @@ class KullaniciController extends Controller
             if (!is_null($aktif_sepet_id)) {
                 $aktif_sepet = Sepet::create([
                     'kullanici_id' => auth()->id()]);
-                $aktif_sepet_id=$aktif_sepet->id;
+                $aktif_sepet_id = $aktif_sepet->id;
             }
             session()->put('aktif_sepet_id', $aktif_sepet_id);
             if (Cart::count() > 0) {
@@ -74,8 +74,7 @@ class KullaniciController extends Controller
 
     public function aktiflestir($anahtar)
     {
-
-        $kullanici = Kullanici::where('aktivasyon_anahtari', $anahtar)->first();
+        $kullanici = Kullanici::where('aktivasyon_anahtari', $anahtar)->firstOrFail();
         if (!is_null($kullanici)) {
             $kullanici->aktivasyon_anahtari = null;
             $kullanici->aktif_mi = 1;

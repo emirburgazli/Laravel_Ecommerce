@@ -32,6 +32,11 @@
             </tr>
             </thead>
             <tbody>
+            @if(count($list)==0)
+                <tr>
+                    <td colspan="6" class="text-center">Kayıt Bulunamadı..</td>
+                </tr>
+            @endif
             @foreach($list as $kullanici)
                 <tr>
                     <td>{{$kullanici->id}}</td>
@@ -41,7 +46,7 @@
                         @if($kullanici->aktif_mi)
                             <span class="label label-success">Aktif</span>
                         @else
-                            <span class="label label-warning">Pasif</span>
+                            <span class="label label-danger">Pasif</span>
                         @endif
                     </td>
                     <td>
