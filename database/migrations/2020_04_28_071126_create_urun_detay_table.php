@@ -18,7 +18,7 @@ class CreateUrunDetayTable extends Migration
             $table->integer('urun_id')->unsigned()->unique();
             $table->boolean('goster_slider')->default(0);
             $table->boolean('goster_gunun_firsati')->default(0);
-            $table->boolean('goster_one_cıkanlar')->default(0);
+            $table->boolean('goster_one_cikanlar')->default(0);
             $table->boolean('goster_cok_satanlar')->default(0);
             $table->boolean('goster_indirimli')->default(0);
             $table->timestamps();

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\UrunDetay;
 
 class Urun extends Model
 {
@@ -21,6 +22,6 @@ class Urun extends Model
 
     public function detay()
     {
-        return $this->hasOne('App\Models\UrunDetay');
+        return $this->hasOne('App\Models\UrunDetay')->withDefault();
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Kullanici;
 use App\Models\KullaniciDetay;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\validate;
 
 
@@ -72,12 +73,17 @@ class KullaniciController extends Controller
 
     public function kaydet($id = 0)
     {
-        $this->validate(request(), [
-            'mail' => 'required|email',
-            'adsoyad' => 'required'
-        ]);
-
         $guncellenecek_veriler = request()->only('adsoyad', 'mail');
+        if (request()->filled('slug')) {
+            $guncellenecek_veriler['slug'] = Str::slug(request('kategori_adi'), '-');
+            request()->merge(['slug'=>$guncellenecek_veriler['slug']]);
+        }
+
+        $this->validate(request(), [
+            'mail' => (request('original_mail') != request('mail') ? 'unique:kullanici,mail' : '' ),
+            'adsoyad' => 'required',
+
+        ]);
 
         if (request()->filled('sifre')) {
             $guncellenecek_veriler['sifre'] = Hash::make(request('sifre'));

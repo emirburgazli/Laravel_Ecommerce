@@ -48,20 +48,20 @@ class KategoriController extends Controller
 
     public function kaydet($id = 0)
     {
-        $this->validate(request(), [
-            'kategori_adi' => 'required|unique:kategori',
-            'slug'=>'unique:kategori'
-        ]);
-
-        $guncellenecek_veriler = request()->only('kategori_adi', 'ust_id');
-
+        $guncellenecek_veriler = request()->only('kategori_adi','slug', 'ust_id');
         if (request()->filled('slug')) {
-            $guncellenecek_veriler['slug'] = Str::slug(request('slug'), '-');
+            $guncellenecek_veriler['slug'] = Str::slug(request('kategori_adi'), '-');
+            request()->merge(['slug'=>$guncellenecek_veriler['slug']]);
         }
         else
         {
-            $guncellenecek_veriler['slug'] = Str::slug(request('kategori_adi'), '-');
+            $guncellenecek_veriler['slug'] = Str::slug(request('slug'), '-');
         }
+
+        $this->validate(request(), [
+            'kategori_adi' => 'required|unique:kategori',
+            'slug'=>(request('original_slug') != request('slug') ? 'unique:kategori,slug' : '' )
+        ]);
 
         if ($id > 0) {
             $kategori = Kategori::where('id', $id)->firstOrFail();
@@ -76,25 +76,14 @@ class KategoriController extends Controller
             ->with('mesaj_tur', 'success');
     }
 
+
+    //kategori silmeyi düzenle
     public function sil($id)
     {
-        $kategoriler = Kategori::find($id)->count();
-       dd($kategoriler);
-
-        if ($sayi>0)
-        {
-            return redirect()->route('yonetim.kategori')
-                ->with('mesaj', 'kategori silinemez.')
-                ->with('mesaj_tur', 'success');
-        }
-        else
-        {
-            Kategori::destroy($id);
-            return redirect()->route('yonetim.kategori')
-                ->with('mesaj', 'kategori Silindi.')
-                ->with('mesaj_tur', 'success');
-
-        }
+        Kategori::destroy($id);
+        return redirect()->route('yonetim.kategori')
+            ->with('mesaj', 'kategori Silindi.')
+            ->with('mesaj_tur', 'success');
 
     }
 }

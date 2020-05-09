@@ -18,7 +18,7 @@ class CreateUrunTable extends Migration
             $table->string('slug',40);
             $table->string('urun_adi',40);
             $table->text('acıklama');
-            $table->decimal('fiyat',6,3);
+            $table->decimal('fiyat',10,2);
             $table->timestamp('olusturma_tarihi')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('guncelleme_tarihi')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('silinme_tarihi')->nullable();

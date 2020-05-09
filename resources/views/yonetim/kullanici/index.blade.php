@@ -29,6 +29,7 @@
                 <th>Aktif Mi ?</th>
                 <th>Yönetici Mi ?</th>
                 <th>Kayıt Tarihi</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -56,6 +57,7 @@
                             <span class="label label-warning">Müşteri</span>
                         @endif
                     </td>
+                    <th>{{$kullanici->olusturma_tarihi}}</th>
                     <td style="width: 100px">
                         <a href="{{route('yonetim.kullanici.duzenle',$kullanici->id)}}" class="btn btn-xs btn-success"
                            data-toggle="tooltip" data-placement="top"

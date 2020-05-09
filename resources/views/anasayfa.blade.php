@@ -62,7 +62,7 @@
                 <div class="panel-heading">Öne Çıkan Ürünler</div>
                 <div class="panel-body">
                     <div class="row">
-                        @foreach($goster_one_cıkanlar as $urun)
+                        @foreach($goster_one_cikanlar as $urun)
                             <div class="col-md-3 product">
                                 <a href="{{route('urun',$urun->slug)  }}">
                                     <img src="https://via.placeholder.com/400x400?text=UrunResmi"></a>

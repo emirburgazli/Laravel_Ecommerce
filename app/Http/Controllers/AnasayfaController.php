@@ -24,9 +24,9 @@ class AnasayfaController extends Controller
             ->orderBy('guncelleme_tarihi', 'desc')
             ->first();
 
-        $goster_one_cıkanlar = Urun::select('urun.*')
+        $goster_one_cikanlar = Urun::select('urun.*')
             ->join('urun_detay', 'urun_detay.urun_id', 'urun.id')
-            ->where('urun_detay.goster_one_cıkanlar', 1)
+            ->where('urun_detay.goster_one_cikanlar', 1)
             ->orderBy('guncelleme_tarihi', 'desc')
             ->take(4)->get();
 
@@ -46,6 +46,6 @@ class AnasayfaController extends Controller
         //$goster_one_cıkanlar = UrunDetay::with('urun')->where('goster_one_cıkanlar', 1)->take(4)->get();
         //$goster_cok_satanlar = UrunDetay::with('urun')->where('goster_cok_satanlar', 1)->take(4)->get();
         //$goster_indirimli = UrunDetay::with('urun')->where('goster_indirimli', 1)->take(4)->get();
-        return view('anasayfa', compact('kategoriler', 'urunler_slider', 'urun_gunun_firsati','goster_indirimli','goster_cok_satanlar','goster_one_cıkanlar'));
+        return view('anasayfa', compact('kategoriler', 'urunler_slider', 'urun_gunun_firsati','goster_indirimli','goster_cok_satanlar','goster_one_cikanlar'));
     }
 }
