@@ -23,6 +23,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="mail">Email</label>
+                    <input type="hidden" name="original_mail" value={{old('slug',$kullanici->mail)}}>
                     <input type="email" class="form-control"  name="mail"  id="mail" placeholder="Email" value={{old('mail',$kullanici->mail)}} >
                 </div>
             </div>

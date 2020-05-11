@@ -154,6 +154,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'adsoyad' =>'Ad Soyad',
+        'mail' =>'Email',
+        'sifre' =>'Şifre',
+        'slug' =>'Slug'
+    ],
 
 ];

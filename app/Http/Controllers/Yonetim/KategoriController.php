@@ -50,16 +50,17 @@ class KategoriController extends Controller
     {
         $guncellenecek_veriler = request()->only('kategori_adi','slug', 'ust_id');
         if (request()->filled('slug')) {
-            $guncellenecek_veriler['slug'] = Str::slug(request('kategori_adi'), '-');
+            $guncellenecek_veriler['slug'] = Str::slug(request('slug'), '-');
             request()->merge(['slug'=>$guncellenecek_veriler['slug']]);
         }
         else
         {
-            $guncellenecek_veriler['slug'] = Str::slug(request('slug'), '-');
+            $guncellenecek_veriler['slug'] = Str::slug(request('kategori_adi'), '-');
+            request()->merge(['slug'=>$guncellenecek_veriler['slug']]);
         }
 
         $this->validate(request(), [
-            'kategori_adi' => 'required|unique:kategori',
+            'kategori_adi' => 'required',
             'slug'=>(request('original_slug') != request('slug') ? 'unique:kategori,slug' : '' )
         ]);
 

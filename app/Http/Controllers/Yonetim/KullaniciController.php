@@ -7,7 +7,6 @@ use App\Models\Kullanici;
 use App\Models\KullaniciDetay;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\Validation\validate;
 
 
@@ -73,39 +72,26 @@ class KullaniciController extends Controller
 
     public function kaydet($id = 0)
     {
-        $guncellenecek_veriler = request()->only('adsoyad', 'mail');
-        if (request()->filled('slug')) {
-            $guncellenecek_veriler['slug'] = Str::slug(request('kategori_adi'), '-');
-            request()->merge(['slug'=>$guncellenecek_veriler['slug']]);
-        }
-
         $this->validate(request(), [
             'mail' => (request('original_mail') != request('mail') ? 'unique:kullanici,mail' : '' ),
-            'adsoyad' => 'required',
-
+            'adsoyad' => 'required'
         ]);
-
+        $guncellenecek_veriler = request()->only('adsoyad', 'mail');
         if (request()->filled('sifre')) {
             $guncellenecek_veriler['sifre'] = Hash::make(request('sifre'));
         }
         $guncellenecek_veriler['aktif_mi'] = request()->has('aktif_mi') && request('aktif_mi') == 1 ? 1 : 0;
         $guncellenecek_veriler['yonetici_mi'] = request()->has('yonetici_mi') && request('yonetici_mi') == 1 ? 1 : 0;
+        $kullanici_detay = request()->only('adres', 'telefon', 'ceptelefonu');
 
         if ($id > 0) {
             $kullanici = Kullanici::where('id', $id)->firstOrFail();
             $kullanici->update($guncellenecek_veriler);
+            $kullanici->detay()->update($kullanici_detay);
         } else {
             $kullanici = Kullanici::create($guncellenecek_veriler);
+            $kullanici->detay()->create($kullanici_detay);
         }
-
-        KullaniciDetay::updateOrCreate(
-            ['kullanici_id' => $kullanici->id],
-            [
-                'adres' => request('adres'),
-                'telefon' => request('telefon'),
-                'ceptelefonu' => request('ceptelefonu')
-            ]
-        );
 
         return redirect()
             ->route('yonetim.kullanici', $kullanici->id)
