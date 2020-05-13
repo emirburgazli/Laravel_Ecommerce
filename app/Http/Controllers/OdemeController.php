@@ -32,7 +32,7 @@ class OdemeController extends Controller
         $siparis['sepet_id'] = session('aktif_sepet_id');
         $siparis['banka'] = "Garanti";
         $siparis['taksit_sayisi'] = 1;
-        $siparis['durum'] = "Siparişleriniz Alındı";
+        $siparis['durum'] = "Siparişiniz Alındı..";
         $siparis['siparis_tutari'] = Cart::Subtotal();
 
         Siparis::create($siparis);

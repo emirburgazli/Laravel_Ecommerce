@@ -18,7 +18,7 @@
                         <tr>
                             <td style="width: 120px;">
                                 <a href="#">
-                                <img src="https://via.placeholder.com/120x100?text=UrunResmi">
+                                    <img src="{{$urunCartItem->urun_resmi !=null  ? '/uploads/urunler/' . $urunCartItem->urun_resmi: 'https://via.placeholder.com/400x400?text=UrunResmi' }}" class="img-responsive" style="min-width: 100%;">
                                 </a>
                             </td>
                             <td>

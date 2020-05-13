@@ -16,7 +16,7 @@ class AnasayfaController extends Controller
             ->join('urun_detay', 'urun_detay.urun_id', 'urun.id')
             ->where('urun_detay.goster_slider', 1)
             ->orderBy('guncelleme_tarihi', 'desc')
-            ->take(4)->get();
+            ->take(get_ayar('anasayfa_slider_urun_adet'))->get();
 
         $urun_gunun_firsati = Urun::select('urun.*')
             ->join('urun_detay', 'urun_detay.urun_id', 'urun.id')
@@ -28,19 +28,19 @@ class AnasayfaController extends Controller
             ->join('urun_detay', 'urun_detay.urun_id', 'urun.id')
             ->where('urun_detay.goster_one_cikanlar', 1)
             ->orderBy('guncelleme_tarihi', 'desc')
-            ->take(4)->get();
+            ->take(get_ayar('anasayfa_one_cikan_urunler'))->get();
 
         $goster_cok_satanlar = Urun::select('urun.*')
             ->join('urun_detay', 'urun_detay.urun_id', 'urun.id')
             ->where('urun_detay.goster_cok_satanlar', 1)
             ->orderBy('guncelleme_tarihi', 'desc')
-            ->take(4)->get();
+            ->take(get_ayar('anasayfa_cok_satan_urunler'))->get();
 
         $goster_indirimli =  Urun::select('urun.*')
             ->join('urun_detay', 'urun_detay.urun_id', 'urun.id')
             ->where('urun_detay.goster_indirimli', 1)
             ->orderBy('guncelleme_tarihi', 'desc')
-            ->take(4)->get();
+            ->take(get_ayar('anasayfa_indirimli_urunler'))->get();
 
         //$urunler_slider = UrunDetay::with('urun')->where('goster_slider', 1)->take(5)->get();
         //$goster_one_cıkanlar = UrunDetay::with('urun')->where('goster_one_cıkanlar', 1)->take(4)->get();

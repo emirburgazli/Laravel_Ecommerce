@@ -27,4 +27,5 @@ class SiparisController extends Controller
             ->firstOrFail();
         return view('siparis', compact('siparis'));
     }
+
 }

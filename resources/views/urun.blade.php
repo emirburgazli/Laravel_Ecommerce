@@ -12,26 +12,34 @@
         <div class="bg-content">
             <div class="row">
                 <div class="col-md-5">
-                    <img src="https://via.placeholder.com/400x300?text=UrunResmi">
+                    <img src="{{$urun->detay->urun_resmi !=null  ? '/uploads/urunler/' . $urun->detay->urun_resmi: 'https://via.placeholder.com/400x400?text=UrunResmi' }}" class="img-responsive" style="min-width: 100%;">
                     <hr>
-                    <div class="row">
+                   <!--
+                   <div class="row">
                         <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img
-                                    src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
+                            <a href="#" class="thumbnail">
+                                <img src="{{$urun->detay->urun_resmi !=null  ? '/uploads/urunler/' . $urun->detay->urun_resmi: 'https://via.placeholder.com/400x400?text=UrunResmi' }}" class="img-responsive" style="min-width: 100%;">
+                            </a>
                         </div>
                         <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img
-                                    src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
+                            <a href="#" class="thumbnail">
+                                <img
+                                <img src="{{$urun->detay->urun_resmi !=null  ? '/uploads/urunler/' . $urun->detay->urun_resmi: 'https://via.placeholder.com/400x400?text=UrunResmi' }}" class="img-responsive" style="min-width: 100%;">
+                            </a>
                         </div>
                         <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img
-                                    src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
+                            <a href="#" class="thumbnail">
+                                <img
+                                <img src="{{$urun->detay->urun_resmi !=null  ? '/uploads/urunler/' . $urun->detay->urun_resmi: 'https://via.placeholder.com/400x400?text=UrunResmi' }}" class="img-responsive" style="min-width: 100%;">
+                            </a>
                         </div>
                         <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img
-                                    src="https://via.placeholder.com/60x60?text=UrunResmi"></a>
+                            <a href="#" class="thumbnail">
+                                <img
+                                <img src="{{$urun->detay->urun_resmi !=null  ? '/uploads/urunler/' . $urun->detay->urun_resmi: 'https://via.placeholder.com/400x400?text=UrunResmi' }}" class="img-responsive" style="min-width: 100%;">
+                            </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-md-7">
                     <h1>{{ $urun->urun_adi }}</h1>

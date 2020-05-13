@@ -12,7 +12,9 @@ class Siparis extends Model
 
     protected $table = "siparis";
 
-    protected $fillable=['sepet_id','siparis_tutari','durum','adsoyad','adres','telefon','ceptelefonu','banka','taksit_sayisi'];
+    protected $fillable=[
+        'sepet_id','siparis_tutari','durum','adsoyad','adres','telefon','ceptelefonu','banka','taksit_sayisi'
+    ];
 
     const CREATED_AT = 'olusturma_tarihi';
     const UPDATED_AT = 'guncelleme_tarihi';
